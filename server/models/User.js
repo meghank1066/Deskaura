@@ -15,6 +15,30 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    profileImage: {
+  type:String,
+  default:""
+},
+
+preferredRole:{
+  type:String,
+  default:""
+},
+
+location:{
+  type:String,
+  default:""
+},
+
+github:{
+  type:String,
+  default:""
+},
+
+linkedin:{
+  type:String,
+  default:""
+}
   },
   {
     timestamps: true,
