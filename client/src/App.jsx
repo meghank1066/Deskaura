@@ -6,6 +6,7 @@ import Jobs from "./pages/Jobs";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import JobDetails from "./pages/JobDetails";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App(){
 

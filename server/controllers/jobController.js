@@ -2,41 +2,28 @@ const Job = require("../models/Job");
 
 
 // create a job
-exports.createJob = async(req,res)=>{
+exports.createJob = async (req, res) => {
+  try {
+    const job = await Job.create({
+      company: req.body.company,
+      role: req.body.role,
+      location: req.body.location,
+      salary: req.body.salary,
+      jobType: req.body.jobType,
+      status: req.body.status,
+      jobLink: req.body.jobLink, // <-- Added missing jobLink
+      user: req.user._id,
+    });
 
-try{
-
-const job = await Job.create({
-
-company:req.body.company,
-
-role:req.body.role,
-
-location:req.body.location,
-
-salary:req.body.salary,
-
-jobType:req.body.jobType,
-
-status:req.body.status,
-
-user:req.user._id
-
-});
-
-
-res.status(201).json(job);
-
-
-}catch(error){
-
-res.status(500).json({
-message:error.message
-});
-
-}
-
+    res.status(201).json(job);
+  } catch (error) {
+    console.error("Backend Error:", error);
+    res.status(400).json({
+      message: error.message,
+    });
+  }
 };
+
 
 // get all jobs
 exports.getJobs = async (req,res)=>{

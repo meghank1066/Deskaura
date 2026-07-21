@@ -1,92 +1,68 @@
 import { useState } from "react";
 import api from "../api/axios";
 import { Link, useNavigate } from "react-router-dom";
+import "../styles/login.css"; 
 
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-function Login(){
+  const navigate = useNavigate();
 
-const [email,setEmail] = useState("");
-const [password,setPassword] = useState("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(""); 
 
-const navigate = useNavigate();
+    try {
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
 
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+      setError(
+        error.response?.data?.message || "Invalid email or password"
+      );
+    }
+  };
 
-const handleLogin = async(e)=>{
+  return (
+    <div className="auth-page">
+      <div className="auth-card">
+        <h1>Login</h1>
 
-e.preventDefault();
+        {error && <div className="auth-error">{error}</div>}
 
-try{
+        <form onSubmit={handleLogin} className="auth-form">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-const res = await api.post("/auth/login",{
-email,
-password
-});
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
+          <button type="submit">Login</button>
+        </form>
 
-localStorage.setItem(
-"token",
-res.data.token
-);
-
-
-navigate("/dashboard");
-
-
-}catch(error){
-
-console.log(error);
-
-}
-
-};
-
-
-return (
-
-<div className="auth-page">
-
-<h1>Login</h1>
-
-
-<form onSubmit={handleLogin}>
-
-
-<input
-type="email"
-placeholder="Email"
-value={email}
-onChange={(e)=>setEmail(e.target.value)}
-/>
-
-
-<input
-type="password"
-placeholder="Password"
-value={password}
-onChange={(e)=>setPassword(e.target.value)}
-/>
-
-
-<button>
-Login
-</button>
-
-
-</form>
-
-
-<p>
-Don't have an account?
-<Link to="/register">
-Register
-</Link>
-</p>
-
-
-</div>
-
-)
-
+        <p>
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default Login;

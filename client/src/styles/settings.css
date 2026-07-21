@@ -1,0 +1,81 @@
+
+.settings-page {
+  flex: 1;
+  padding: 40px;
+  margin-left: 72px; 
+  background: #f7f8fc;
+  min-height: 100vh;
+}
+
+.settings-page h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 28px;
+}
+ 
+.settings-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid #eceef2;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  max-width: 600px;
+}
+
+.settings-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 6px 0;
+}
+
+.settings-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+ 
+.settings-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  color: #374151;
+}
+
+.btn-secondary:hover {
+  background: #f8fafc;
+  border-color: #d1d5db;
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: transparent;
+}
+
+.btn-danger:hover {
+  background: #fca5a5;
+}
+ 
+@media (max-width: 768px) {
+  .settings-page {
+    padding: 24px;
+  }
+}

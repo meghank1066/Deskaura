@@ -1,36 +1,52 @@
-function Settings(){
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import "../styles/settings.css";
 
-return(
+function Settings() {
+  const navigate = useNavigate();
 
-<div>
+  const handleLogout = () => {
+    // 1. Remove auth token or user data from localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
-<h1>Settings</h1>
+    // Optional: If you use an AuthContext, call it here (e.g., logout())
 
+    // 2. Redirect user to the login page
+    navigate("/login");
+  };
 
-<div className="settings-card">
+  const handleChangePassword = () => {
+    // Placeholder or navigate to password reset flow
+    alert("Change Password feature coming soon!");
+  };
 
+  return (
+    <div className="dashboard-layout">
+      <Navbar />
 
-<h3>Account Settings</h3>
+      <main className="settings-page">
+        <h1>Settings</h1>
 
+        <div className="settings-card">
+          <h3>Account Settings</h3>
+          <p className="settings-description">
+            Manage your account credentials and active session.
+          </p>
 
-<button>
-Change Password
-</button>
+          <div className="settings-actions">
+            <button className="btn btn-secondary" onClick={handleChangePassword}>
+              Change Password
+            </button>
 
-
-<button>
-Logout
-</button>
-
-
-</div>
-
-
-</div>
-
-)
-
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
-
 
 export default Settings;
